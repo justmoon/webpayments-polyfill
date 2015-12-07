@@ -1,10 +1,18 @@
-<script src="src/polyfill.js"></script>
+<script src="dist/polyfill.js"></script>
 <script>
-window.onload = function () {
+function makePayment(amount) {
   navigator.requestPayment(['interledger'], {
-    amount: 1000, // cents
+    amount: amount,
     currencyCode: 'USD',
     countryCode: 'US'
+  }, {
+    interledger: {
+      account: 'https://localhost:3001/accounts/mellie'
+    }
   })
 }
 </script>
+<body style="background-color: #fbb">
+<p><a href="#" onclick="makePayment('10.00'); return false">10$</a></p>
+<p><a href="#" onclick="makePayment('150.00'); return false">150$</a></p>
+</body>

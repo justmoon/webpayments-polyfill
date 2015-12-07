@@ -1,0 +1,48 @@
+.dialog {
+  padding: 0;
+  width: 300px;
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  animation-name: slidein, liftup;
+  animation-delay: 0s, 0.3s;
+  animation-duration: 0.5s, 0.2s;
+  animation-fill-mode: forwards, forwards;
+  animation-timing-function: cubic-bezier(0.42, 0, 0.07, 0.99);
+}
+
+.header {
+  background-color: #0074D9;
+  color: #fff;
+  padding: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: .16em;
+}
+
+.dialog p {
+  margin: 12px
+}
+
+@keyframes slidein {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes liftup {
+  0% {
+    box-shadow: none;
+  }
+
+  100% {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+}

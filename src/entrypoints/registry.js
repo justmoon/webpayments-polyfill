@@ -20,12 +20,16 @@ function receiveMessage (event) {
         }, '*')
       }
       // TODO Validate scheme
-      window.localStorage.setItem('handler:' + event.data.scheme, event.data.uri)
-      event.source.postMessage({
-        type: 'callback',
-        callbackId: event.data.callbackId,
-        result: true
-      }, '*')
+      // TODO A modal dialog would be better
+      const result = window.confirm('Allow ' + event.origin + ' to handle all ' + event.data.scheme + ' payments?')
+      if (result) {
+        window.localStorage.setItem('handler:' + event.data.scheme, event.data.uri)
+        event.source.postMessage({
+          type: 'callback',
+          callbackId: event.data.callbackId,
+          result: true
+        }, '*')
+      }
       break
     case 'pay':
       if (typeof event.data.schemeData !== 'object') {

@@ -1,6 +1,7 @@
-<script src="src/polyfill.js"></script>
+<script src="dist/polyfill.js"></script>
 <script>
-window.onload = function () {
+function registerHandler() {
   navigator.registerPaymentHandler('interledger', location.href.replace('register', 'wallet'))
 }
 </script>
+<a href="#" onclick="registerHandler(); return false">register</a>
