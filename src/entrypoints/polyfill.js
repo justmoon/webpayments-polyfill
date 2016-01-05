@@ -1,7 +1,7 @@
 'use strict'
 
 ;(function () {
-  const ownUri = document.currentScript.src
+  var ownUri = document.currentScript.src
 
   // TODO Avoid creating a message listener on the host page
   window.addEventListener('message', receiveMessage, false)
@@ -22,7 +22,6 @@
   }
 
   function requestPayment (supportedInstruments, details, schemeData) {
-    // TODO Implement
     openIframe().then(function (iframe) {
       sendMessage(iframe, {
         type: 'pay',
@@ -35,12 +34,12 @@
     })
   }
 
-  const callbacks = []
-  let unique = 0
+  var callbacks = []
+  var unique = 0
   function receiveMessage (event) {
     switch (event.data.type) {
       case 'callback':
-        const callback = callbacks[event.data.callbackId]
+        var callback = callbacks[event.data.callbackId]
         if (callback) {
           callback(event)
         }
@@ -53,7 +52,7 @@
         if (event.data.error) {
           if (typeof event.data.error !== 'object') return
 
-          const error = new Error(event.data.error.message)
+          var error = new Error(event.data.error.message)
           error.name = event.data.error.name
           reject(error)
         } else {
@@ -68,7 +67,7 @@
 
   function openIframe () {
     return new Promise(function (resolve, reject) {
-      const iframe = document.createElement('iframe')
+      var iframe = document.createElement('iframe')
       iframe.src = getIframeUri()
       iframe.frameborder = 0
       iframe.allowtransparency = true
