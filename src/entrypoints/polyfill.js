@@ -92,8 +92,16 @@
     return ownUri.substring(0, ownUri.lastIndexOf('/')) + '/registry.html'
   }
 
-  if (!window.requestPayment) {
-    window.navigator.registerPaymentHandler = registerPaymentHandler
-    window.navigator.requestPayment = requestPayment
+  function exportOnto (obj) {
+    obj.registerPaymentHandler = registerPaymentHandler
+    obj.requestPayment = requestPayment
+  }
+
+  if (!window.navigator.requestPayment) {
+    exportOnto(window.navigator)
+  }
+
+  if (typeof exports === 'object') {
+    exportOnto(exports)
   }
 })()
