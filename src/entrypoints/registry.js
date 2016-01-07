@@ -36,12 +36,12 @@ function receiveMessage (event) {
         event.data.schemeData = {}
       }
       // TODO Validate schemes
-      for (const instrument of event.data.supportedInstruments) {
-        const paymentData = Object.assign({}, event.data.details, event.data.schemeData[instrument])
+      for (const method of event.data.supportedMethods) {
+        const paymentData = Object.assign({}, event.data.details, event.data.schemeData[method])
         const encodedPaymentData = encodeQueryData(paymentData)
-        const baseUri = window.localStorage.getItem('handler:' + instrument)
+        const baseUri = window.localStorage.getItem('handler:' + method)
         const uri = baseUri + '?' + encodedPaymentData
-        console.log('uri', uri, instrument)
+        console.log('uri', uri, method)
         if (uri) {
           window.location.href = uri
           return

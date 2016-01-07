@@ -6,6 +6,37 @@
   // TODO Avoid creating a message listener on the host page
   window.addEventListener('message', receiveMessage, false)
 
+  function PaymentRequest (supportedMethods, details, options, data) {
+    this.supportedMethods = supportedMethods.slice()
+    this.details = cloneObject(details)
+    this.options = cloneObject(options) || {}
+    this.data = cloneObject(data) || {}
+
+    this.state = 'created'
+    this.shippingAddress = null
+    this.shippingOption = null
+    this.updating = false
+  }
+
+  PaymentRequest.prototype.show = function () {
+    var self = this
+    if (this.state !== 'created') {
+      // TODO: Should be an InvalidStateError
+      throw new Error('show() must only be called on a newly created PaymentRequest.')
+    }
+    this.state = 'interactive'
+    return openIframe().then(function (iframe) {
+      return sendMessage(iframe, {
+        type: 'pay',
+        supportedMethods: self.supportedMethods,
+        details: self.details,
+        data: self.data
+      }).then(function () {
+        self.state = 'accepted'
+      })
+    })
+  }
+
   function registerPaymentHandler (scheme, uri) {
     openIframe().then(function (iframe) {
       sendMessage(iframe, {
@@ -17,19 +48,6 @@
         document.body.removeChild(iframe)
       }).catch(function (error) {
         console.error('registration error: ' + error)
-      })
-    })
-  }
-
-  function requestPayment (supportedInstruments, details, schemeData) {
-    openIframe().then(function (iframe) {
-      sendMessage(iframe, {
-        type: 'pay',
-        supportedInstruments,
-        details,
-        schemeData
-      }).catch(function (error) {
-        console.error('payment error: ' + error)
       })
     })
   }
@@ -92,16 +110,18 @@
     return ownUri.substring(0, ownUri.lastIndexOf('/')) + '/registry.html'
   }
 
-  function exportOnto (obj) {
-    obj.registerPaymentHandler = registerPaymentHandler
-    obj.requestPayment = requestPayment
+  // Utilities
+  function cloneObject (obj) {
+    return JSON.parse(JSON.stringify(obj || null))
   }
 
-  if (!window.navigator.requestPayment) {
-    exportOnto(window.navigator)
+  if (!window.PaymentRequest) {
+    window.PaymentRequest = PaymentRequest
+    window.navigator.registerPaymentHandler = registerPaymentHandler
   }
 
   if (typeof exports === 'object') {
-    exportOnto(exports)
+    exports.PaymentRequest = PaymentRequest
+    exports.registerPaymentHandler = registerPaymentHandler
   }
 })()

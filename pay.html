@@ -1,7 +1,7 @@
 <script src="dist/polyfill.js"></script>
 <script>
 function makePayment(amount) {
-  navigator.requestPayment(['interledger'], {
+  new PaymentRequest(['interledger'], {
     amount: amount,
     currencyCode: 'USD',
     countryCode: 'US'
@@ -9,7 +9,7 @@ function makePayment(amount) {
     interledger: {
       account: 'https://localhost:3001/accounts/mellie'
     }
-  })
+  }).show()
 }
 </script>
 <body style="background-color: #fbb">

@@ -2,12 +2,12 @@
 
 > Experimental web payments polyfill
 
-**WARNING: The [Web Payments spec](http://discourse.wicg.io/t/rfc-proposal-for-new-web-payments-api/1100) is still under heavy development. This implementation (and its API) will change often and without notice.**
+**WARNING: The [Web Payments spec](http://wicg.github.io/paymentrequest/) is still under heavy development. This implementation (and its API) will change often and without notice.**
 
 ## Example
 
 ``` js
-navigator.requestPayment(['interledger'], {
+new PaymentRequest(['interledger'], {
   amount: '100',
   currencyCode: 'USD',
   countryCode: 'US'
@@ -15,6 +15,8 @@ navigator.requestPayment(['interledger'], {
   interledger: {
     account: 'https://localhost:3001/accounts/mellie'
   }
+}).show().then(function () {
+  // payment request accepted
 })
 ```
 
@@ -55,7 +57,7 @@ You can then register a callback to be called when the polyfill has been loaded:
 ``` html
 <script>
 WebPaymentsOnLoad(function () {
-  navigator.requestPayment(/* ... */)
+  new PaymentRequest(/* ... */)
 })
 </script>
 ```
