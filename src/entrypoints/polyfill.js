@@ -27,18 +27,19 @@
         type: 'pay',
         supportedMethods: self.supportedMethods,
         details: self.details,
-        data: self.data
+        methodData: self.data
       }).then(function () {
+        channel.close()
         self.state = 'accepted'
       })
     })
   }
 
-  function registerPaymentHandler (scheme, uri) {
+  function registerPaymentHandler (method, uri) {
     new Channel().open().then(function (channel) {
       channel.sendMessage({
         type: 'register',
-        scheme,
+        method,
         uri
       }).then(function (result) {
         console.log('registration complete')
