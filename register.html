@@ -1,7 +1,27 @@
-<script src="dist/polyfill.js"></script>
-<script>
-function registerHandler() {
-  navigator.registerPaymentHandler('interledger', location.href.replace('register', 'wallet'))
-}
-</script>
-<a id="register" href="#" onclick="registerHandler(); return false">register</a>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Example: Wallet Registration</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/simplex/bootstrap.min.css" rel="stylesheet" integrity="sha256-rgHoMgF45/9e2kvxfvR0KarwQNw5CRqgxbrthGpeUuc= sha512-CGGV53FSdrXrjyGCNk04p+xuna3CbE33n773A0EEmqtcN8W3NaFsR0vSQcbll5dpSS90d3i2Zh3jFX/j46hzJA==" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>Wallet Registration</h1>
+        <p class="lead">A wallet can register itself as the default handler for a payment method.</p>
+      </div>
+      <p>
+        <button id="register" type="button" class="btn btn-primary" href="#" onclick="registerHandler(); return false">Make this your default wallet</button>
+      </p>
+    </div>
+    <script src="dist/polyfill.js"></script>
+    <script>
+    function registerHandler() {
+      navigator.registerPaymentHandler('interledger', location.href.replace('register', 'wallet'))
+    }
+    </script>
+  </body>
+</html>

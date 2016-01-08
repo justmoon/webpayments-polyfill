@@ -1,18 +1,33 @@
-<script src="dist/polyfill.js"></script>
-<script>
-function makePayment(amount) {
-  new PaymentRequest(['interledger'], {
-    amount: amount,
-    currencyCode: 'USD',
-    countryCode: 'US'
-  }, {
-    interledger: {
-      account: 'https://localhost:3001/accounts/mellie'
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Example: Payment</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/simplex/bootstrap.min.css" rel="stylesheet" integrity="sha256-rgHoMgF45/9e2kvxfvR0KarwQNw5CRqgxbrthGpeUuc= sha512-CGGV53FSdrXrjyGCNk04p+xuna3CbE33n773A0EEmqtcN8W3NaFsR0vSQcbll5dpSS90d3i2Zh3jFX/j46hzJA==" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>Example: Payment</h1>
+        <p class="lead">It's very easy to accept Web Payments!</p>
+      </div>
+      <p><button id="pay" type="button" class="btn btn-default" href="#" onclick="makePayment('10.00'); return false">Pay 10$</button></p>
+      <p><button id="pay" type="button" class="btn btn-default" href="#" onclick="makePayment('100.00'); return false">Pay 100$</button></p>
+    <script src="dist/polyfill.js"></script>
+    <script>
+    function makePayment(amount) {
+      new PaymentRequest(['interledger'], {
+        amount: amount,
+        currencyCode: 'USD',
+        countryCode: 'US'
+      }, {
+        interledger: {
+          account: 'https://localhost:3001/accounts/mellie'
+        }
+      }).show()
     }
-  }).show()
-}
-</script>
-<body style="background-color: #fbb">
-<p><a id="pay" href="#" onclick="makePayment('10.00'); return false">10$</a></p>
-<p><a id="pay2" href="#" onclick="makePayment('150.00'); return false">150$</a></p>
-</body>
+    </script>
+  </body>
+</html>

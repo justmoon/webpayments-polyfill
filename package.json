@@ -38,7 +38,7 @@
     "start": "node server",
     "build": "NODE_ENV=production webpack --config webpack.config.production.js --progress --profile --colors",
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "intern-runner config=test/intern"
   },
   "repository": {
     "type": "git",
