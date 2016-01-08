@@ -12,9 +12,9 @@ define(function (require) {
         assert.isFunction(window.navigator.registerPaymentHandler)
       }
     },
-    requestPayment: {
+    PaymentRequest: {
       'is a function': function () {
-        assert.isFunction(window.navigator.requestPayment)
+        assert.isFunction(window.PaymentRequest)
       }
     }
   })
