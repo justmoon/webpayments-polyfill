@@ -15,7 +15,7 @@
       </div>
       <p><button id="pay" type="button" class="btn btn-default" href="#" onclick="makePayment('10.00'); return false">Pay 10$</button></p>
       <p><button id="pay" type="button" class="btn btn-default" href="#" onclick="makePayment('100.00'); return false">Pay 100$</button></p>
-    <script src="dist/polyfill.js"></script>
+    <script src="src/polyfill/index.js"></script>
     <script>
     function makePayment(amount) {
       new PaymentRequest(['interledger'], {

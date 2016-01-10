@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'eval',
   entry: {
     'registry.html': './src/pages/registry.html',
-    'polyfill.js': './src/entrypoints/polyfill',
+    'polyfill.js': './src/polyfill',
     'registry.js': './src/entrypoints/registry',
     'wallet.js': [
       'webpack-dev-server/client?http://localhost:3000',

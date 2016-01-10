@@ -6,7 +6,7 @@ module.exports = {
   devtool: 'eval',
   entry: {
     'registry.html': './src/pages/registry.html',
-    'polyfill.js': './src/entrypoints/polyfill',
+    'polyfill.js': './src/polyfill',
     'registry.js': './src/entrypoints/registry',
     'wallet.js': './src/entrypoints/wallet.jsx'
   },

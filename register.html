@@ -17,7 +17,7 @@
         <button id="register" type="button" class="btn btn-primary" href="#" onclick="registerHandler(); return false">Make this your default wallet</button>
       </p>
     </div>
-    <script src="dist/polyfill.js"></script>
+    <script src="src/polyfill/index.js"></script>
     <script>
     function registerHandler() {
       navigator.registerPaymentHandler('interledger', location.href.replace('register', 'wallet'))
