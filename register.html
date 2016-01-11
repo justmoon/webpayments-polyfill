@@ -1,7 +1,7 @@
 <script src="dist/polyfill.js"></script>
 <script>
-function registerHandler() {
-  navigator.registerPaymentHandler('interledger', location.href.replace('register', 'wallet'))
+function registerApp() {
+  navigator.payments.registerPaymentApp('https://interledger.org/v1/', location.href.replace('register', 'wallet'))
 }
 </script>
-<a href="#" onclick="registerHandler(); return false">register</a>
+<a href="#" onclick="registerApp(); return false">register</a>

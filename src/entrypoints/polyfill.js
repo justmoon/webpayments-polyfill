@@ -6,12 +6,26 @@
   // TODO Avoid creating a message listener on the host page
   window.addEventListener('message', receiveMessage, false)
 
-  function registerPaymentHandler (scheme, uri) {
+  function isPaymentAppInstalled (id) {
+    // TODO Implement
+    openIframe().then(function (iframe) {
+      sendMessage(iframe, {
+        type: 'query',
+        id
+      }).then(function (result) {
+        return result
+      }).catch(function (error) {
+        // For security reasons we never throw an error we just return false
+        return false
+      })
+    })
+  }
+
+  function registerPaymentApp (manifest) {
     openIframe().then(function (iframe) {
       sendMessage(iframe, {
         type: 'register',
-        scheme,
-        uri
+        manifest
       }).then(function (result) {
         console.log('registration complete')
         document.body.removeChild(iframe)
@@ -21,14 +35,13 @@
     })
   }
 
-  function requestPayment (supportedInstruments, details, schemeData) {
+  function requestPayment (request, options) {
     // TODO Implement
     openIframe().then(function (iframe) {
       sendMessage(iframe, {
         type: 'pay',
-        supportedInstruments,
-        details,
-        schemeData
+        request,
+        options
       }).catch(function (error) {
         console.error('payment error: ' + error)
       })
@@ -90,11 +103,15 @@
   }
 
   function getIframeUri () {
-    return ownUri.substring(0, ownUri.lastIndexOf('/')) + '/registry.html'
+    return ownUri.substring(0, ownUri.lastIndexOf('/')) + '/mediator.html'
   }
 
-  if (!window.requestPayment) {
-    window.navigator.registerPaymentHandler = registerPaymentHandler
-    window.navigator.requestPayment = requestPayment
+  if (!window.navigator.payments) {
+    window.navigator.payments =
+    {
+      isPaymentAppInstalled: isPaymentAppInstalled,
+      registerPaymentApp: registerPaymentApp,
+      requestPayment: requestPayment
+    }
   }
 })()

@@ -1,12 +1,12 @@
 <script src="dist/polyfill.js"></script>
 <script>
 function makePayment(amount) {
-  navigator.requestPayment(['interledger'], {
+  navigator.requestPayment(['https://interledger.org/v1/'], {
     amount: amount,
     currencyCode: 'USD',
     countryCode: 'US'
   }, {
-    interledger: {
+    "https://interledger.org/v1/": {
       account: 'https://localhost:3001/accounts/mellie'
     }
   })

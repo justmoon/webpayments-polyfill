@@ -5,9 +5,9 @@ const postcssImport = require('postcss-import')
 module.exports = {
   devtool: 'eval',
   entry: {
-    'registry.html': './src/pages/registry.html',
+    'mediator.html': './src/pages/mediator.html',
     'polyfill.js': './src/entrypoints/polyfill',
-    'registry.js': './src/entrypoints/registry',
+    'registry.js': './src/entrypoints/mediator',
     'wallet.js': './src/entrypoints/wallet.jsx'
   },
   output: {
@@ -16,7 +16,7 @@ module.exports = {
     publicPath: '/dist/'
   },
   plugins: [
-    new IndexHtmlPlugin('registry.html', 'registry.html')
+    new IndexHtmlPlugin('mediator.html', 'mediator.html')
   ],
   module: {
     loaders: [{

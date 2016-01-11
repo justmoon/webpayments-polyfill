@@ -6,9 +6,9 @@ const postcssImport = require('postcss-import')
 module.exports = {
   devtool: 'eval',
   entry: {
-    'registry.html': './src/pages/registry.html',
+    'mediator.html': './src/pages/mediator.html',
     'polyfill.js': './src/entrypoints/polyfill',
-    'registry.js': './src/entrypoints/registry',
+    'mediator.js': './src/entrypoints/mediator',
     'wallet.js': [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
@@ -24,7 +24,7 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new IndexHtmlPlugin('registry.html', 'registry.html')
+    new IndexHtmlPlugin('mediator.html', 'mediator.html')
   ],
   module: {
     loaders: [{
