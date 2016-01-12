@@ -6,19 +6,20 @@ const postcssImport = require('postcss-import')
 module.exports = {
   devtool: 'eval',
   entry: {
-    'registry.html': './src/pages/registry.html',
+    'registry.html': './src/polyfill/registry.html',
     'polyfill.js': './src/polyfill',
-    'registry.js': './src/entrypoints/registry',
+    'registry.js': './src/polyfill/registry',
     'wallet.js': [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
       './src/entrypoints/wallet.jsx'
-    ]
+    ],
+    'pay.html': './src/demo/pay.html'
   },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name]',
-    publicPath: '/dist/'
+    publicPath: '/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

@@ -10,12 +10,12 @@
   <body>
     <div class="container">
       <div class="page-header">
-        <h1>Example: Payment</h1>
+        <h1>Example: Payment <span class="label label-primary pull-right">MERCHANT</span></h1>
         <p class="lead">It's very easy to accept Web Payments!</p>
       </div>
       <p><button id="pay" type="button" class="btn btn-default" href="#" onclick="makePayment('10.00'); return false">Pay 10$</button></p>
       <p><button id="pay" type="button" class="btn btn-default" href="#" onclick="makePayment('100.00'); return false">Pay 100$</button></p>
-    <script src="src/polyfill/index.js"></script>
+    <script src="../polyfill.js"></script>
     <script>
     function makePayment(amount) {
       new PaymentRequest(['interledger'], {

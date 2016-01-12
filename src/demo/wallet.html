@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Example: Wallet Payment</title>
+    <style>body { background-color: rgba(0, 0, 0, 0) }</style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/simplex/bootstrap.min.css" rel="stylesheet" integrity="sha256-rgHoMgF45/9e2kvxfvR0KarwQNw5CRqgxbrthGpeUuc= sha512-CGGV53FSdrXrjyGCNk04p+xuna3CbE33n773A0EEmqtcN8W3NaFsR0vSQcbll5dpSS90d3i2Zh3jFX/j46hzJA==" crossorigin="anonymous">
+    <link rel="stylesheet" href="wallet.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Confirm Payment <span class="label label-info pull-right">WALLET</span>
+        </div>
+        <div class="panel-body">
+          <p>
+            Would you like to send ... to ...?
+          </p>
+          <button id="confirmPayment" type="button" class="btn btn-primary" href="#" onclick="confirmHandler(); return false">Confirm Payment</button>
+        </div>
+      </div>
+    </div>
+    <script src="../polyfill.js"></script>
+    <script>
+    $(function () {
+
+    })
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    function confirmHandler() {
+      window.location.href = getParameterByName('return')
+    }
+    </script>
+  </body>
+</html>

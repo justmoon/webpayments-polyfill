@@ -5,15 +5,15 @@ const postcssImport = require('postcss-import')
 module.exports = {
   devtool: 'eval',
   entry: {
-    'registry.html': './src/pages/registry.html',
+    'registry.html': './src/polyfill/registry.html',
     'polyfill.js': './src/polyfill',
-    'registry.js': './src/entrypoints/registry',
+    'registry.js': './src/polyfill/registry',
     'wallet.js': './src/entrypoints/wallet.jsx'
   },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name]',
-    publicPath: '/dist/'
+    publicPath: '/'
   },
   plugins: [
     new IndexHtmlPlugin('registry.html', 'registry.html')
