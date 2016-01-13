@@ -66,4 +66,4 @@ WebPaymentsOnLoad(function () {
 
 *TODO: Add API documentation*
 
-For now, please see the spec: http://discourse.wicg.io/t/rfc-proposal-for-new-web-payments-api/1100
+For now, please see the spec: https://github.com/WICG/paymentrequest/blob/gh-pages/explainer.md
