@@ -7,12 +7,12 @@ define(function (require) {
 
     'register handler': function () {
       return this.remote
-        .get(require.toUrl('register.html'))
+        .get(require.toUrl('src/demo/register.html'))
         .findById('register')
           .click()
           .end()
         .acceptAlert()
-        .get(require.toUrl('pay.html'))
+        .get(require.toUrl('src/demo/pay.html'))
         .findById('pay')
           .click()
           .end()

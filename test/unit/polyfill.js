@@ -1,7 +1,7 @@
 define(function (require) {
   var registerSuite = require('intern!object')
   var assert = require('intern/chai!assert')
-  require('src/polyfill/index.js')
+  require('src/polyfill.js')
 
   registerSuite({
     name: 'polyfill',
