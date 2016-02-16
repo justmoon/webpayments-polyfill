@@ -36,17 +36,47 @@
   }
 
   function registerPaymentHandler (method, uri) {
-    new Channel().open().then(function (channel) {
-      channel.sendMessage({
+    const channel = new Channel()
+    return channel.open().then(function () {
+      return channel.sendMessage({
         type: 'register',
         method,
         uri
-      }).then(function (result) {
-        console.log('registration complete')
-        channel.close()
-      }).catch(function (error) {
-        console.error('registration error: ' + error)
       })
+    }).then(function () {
+      console.log('registration complete')
+      channel.close()
+    }).catch(function (error) {
+      console.error('registration error: ' + error)
+    })
+  }
+
+  function unregisterPaymentHandler (method, uri) {
+    const channel = new Channel()
+    return channel.open().then(function () {
+      return channel.sendMessage({
+        type: 'unregister',
+        method
+      })
+    }).then(function () {
+      console.log('removal complete')
+      channel.close()
+    }).catch(function (error) {
+      console.error('removal error: ' + error)
+    })
+  }
+
+  function getPaymentHandler (method, uri) {
+    const channel = new Channel()
+    return channel.open().then(function () {
+      return channel.sendMessage({
+        type: 'check',
+        method,
+        uri
+      })
+    }).then(function (result) {
+      channel.close()
+      return result
     })
   }
 
@@ -154,10 +184,14 @@
   if (!window.PaymentRequest) {
     window.PaymentRequest = PaymentRequest
     window.navigator.registerPaymentHandler = registerPaymentHandler
+    window.navigator.unregisterPaymentHandler = unregisterPaymentHandler
+    window.navigator.getPaymentHandler = getPaymentHandler
   }
 
   if (typeof exports === 'object') {
     exports.PaymentRequest = PaymentRequest
     exports.registerPaymentHandler = registerPaymentHandler
+    exports.unregisterPaymentHandler = unregisterPaymentHandler
+    exports.getPaymentHandler = getPaymentHandler
   }
 })()

@@ -17,22 +17,40 @@
         Web Payments (and Interledger) are about choice. There will be many providers for each payment method. That means a wallet has to register itself:
       </p>
       <div class="alert alert-info">
-        <p>Example Wallet is not your default Interledger wallet.</p>
-        <p><button id="register" type="button" class="btn btn-primary" href="#" onclick="registerHandler(); return false">Set as default</button></p>
+        <p>Example Wallet is <strong id="state">not </strong>your default demo wallet.</p>
+        <p>
+          <button id="register" type="button" class="btn btn-primary" href="#" onclick="registerHandler(); return false">Set as default</button>
+          <button id="unregister" type="button" class="btn btn-primary" href="#" onclick="unregisterHandler(); return false">Unregister</button>
+        </p>
       </div>
       <h2>Behind the scenes</h2>
       <p>
         In order to trigger the registration as a handler for this payment method, the provider makes a call to <code>navigator.registerPaymentHandler</code>:
       </p>
       <pre>function registerHandler() {
-  navigator.registerPaymentHandler('interledger', 'https://wallet.example/pay')
+  navigator.registerPaymentHandler('demo', 'https://wallet.example/pay')
 }</pre>
     </div>
     <script src="../polyfill.js"></script>
     <script>
-    function registerHandler() {
-      navigator.registerPaymentHandler('interledger', location.href.replace('register', 'wallet'))
+    function registerHandler () {
+      navigator.registerPaymentHandler('demo', location.href.replace('register', 'wallet')).then(function () {
+        updateState()
+      })
     }
+    function unregisterHandler () {
+      navigator.unregisterPaymentHandler('demo').then(function () {
+        updateState()
+      })
+    }
+    function updateState () {
+      navigator.getPaymentHandler('demo').then(function (state) {
+        document.getElementById('state').style.display = state ? 'none' : 'inline'
+        document.getElementById('register').style.display = state ? 'none' : 'block'
+        document.getElementById('unregister').style.display = state ? 'block' : 'none'
+      })
+    }
+    window.onload = updateState()
     </script>
   </body>
 </html>
