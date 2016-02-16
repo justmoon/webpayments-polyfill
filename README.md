@@ -44,11 +44,11 @@ The basic script tag method will be blocking. A non-blocking alternative is the 
 
 ``` html
 <script>
-(function(w,e,b,p,a,y) {
+void function(w,e,b,p,a,y) {
   w[p] = w[p] || (function (cb) { this.push(cb); return this }).bind([]);
   a = e.createElement(b); a.async = 1; a.src = '//web-payments.net/polyfill.js';
   y = e.getElementsByTagName(b)[0]; y.parentNode.insertBefore(a,y);
-})(window,document,'script','WebPaymentsOnLoad');
+}(window,document,'script','WebPaymentsOnLoad');
 </script>
 ```
 
